@@ -8,6 +8,9 @@
 	integer, dimension(:), allocatable :: Iz
 	integer :: natom
 	integer :: verbose
+	character(len=500) :: do_energy_1, do_energy_2, do_energy_3
+	character(len=500) :: do_forces_1, do_forces_2, do_forces_3
+	character(len=500) :: make_coords
 	end module
 
 	program scarlett
@@ -34,7 +37,7 @@
 	if (natom.eq.0) stop "0 atoms in your input file"
 	call init_scarlet()
 
-!	call do_steep(E)
+	call do_steep(E)
 	write(*,*) "final energy ", E
 	call finalize_scarlet()
 	end program 
@@ -43,6 +46,9 @@
 	USE scarlett_mod, only : r, Iz, natom
 	implicit none
 	allocate (r(natom,3), Iz(natom))
+!para prueba
+	Iz=1
+	IZ(1)=8
 	end subroutine init_scarlet
 
 	subroutine finalize_scarlet()
@@ -52,21 +58,27 @@
         end subroutine finalize_scarlet
 
 	subroutine defaults_scarlet()
-	USE scarlett_mod, only :Force_cut, Energy_cut, minimzation_steep, verbose, n_min_steeps, lineal_search, n_points, natom
+	USE scarlett_mod, only :Force_cut, Energy_cut, minimzation_steep, verbose, n_min_steeps, lineal_search, n_points, natom, do_energy_1, do_energy_2, do_energy_3,do_forces_1, do_forces_2, do_forces_3, make_coords
+
+
 	implicit none
 	verbose=0                      ; Force_cut=1D-5                     ;
 	Energy_cut= 1D-4               ; minimzation_steep=5D-2             ;
-	n_min_steeps = 500             ; lineal_search=.true.               ;
+	n_min_steeps = 10              ; lineal_search=.true.               ;
 	n_points = 5                   ; natom=0                            ;
+	do_energy_1 = ""               ; do_energy_2 = ""                   ;
+	do_energy_3 = ""               ; do_forces_1 = ""                   ;
+	do_forces_2 = ""               ; do_forces_3 = ""                   ;
+	make_coords = ""
 	end subroutine defaults_scarlet
 
 	subroutine read_input(inputFile)
-	USE scarlett_mod, only :Force_cut, Energy_cut, minimzation_steep, n_points,n_min_steeps,lineal_search,natom,verbose
+	USE scarlett_mod, only :Force_cut, Energy_cut, minimzation_steep, n_points,n_min_steeps,lineal_search,natom,verbose, do_energy_1, do_energy_2, do_energy_3,do_forces_1, do_forces_2, do_forces_3, make_coords
 	implicit none
 	integer :: ios, iErr
 	logical :: fileExists
 	character(len=20), intent(in)  :: inputFile
-	namelist /jolie/ Force_cut, Energy_cut, minimzation_steep,n_points,n_min_steeps,lineal_search,natom,verbose, natom
+	namelist /jolie/ Force_cut, Energy_cut, minimzation_steep,n_points,n_min_steeps,lineal_search,natom,verbose, natom, do_energy_1, do_energy_2, do_energy_3,do_forces_1, do_forces_2, do_forces_3, make_coords
 	Inquire(file = inputFile, exist = fileExists)
 
 	write(*,*) "input file ", inputFile, "2"
@@ -96,7 +108,9 @@
 !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
 
 	subroutine do_steep(E)
-	USE scarlett_mod, only : Force_cut, Energy_cut, minimzation_steep, n_min_steeps, natom, r, lineal_search, n_points
+	USE scarlett_mod, only : Force_cut, Energy_cut, minimzation_steep, n_min_steeps, natom, r, lineal_search, n_points, do_energy_1, do_energy_2, do_energy_3, do_forces_1, do_forces_2, do_forces_3, make_coords
+
+
 	IMPLICIT NONE
 	real*8, intent(inout) :: E !energy
 	real*8 :: Emin, step_size, Fmax, d_E !Energy of previus steep, max displacement (Bohrs) of an atom in each steep, max |force| on an atoms, E(steep i)-E(steep i-1)
@@ -127,9 +141,26 @@
 	lambda=0.d0
 	require_forces=.true.
 
-!	call SCF(E) calculo de E
-	Emin=E
 
+!first energy calculation
+	CALL system(do_energy_1)
+	CALL system(do_energy_2)
+	CALL system(do_energy_3)
+	open(unit=50,file="energy-buffer",form='unformatted',access='stream',status='old')
+        read(50) E
+        close(50)
+
+	open(unit=52,file="position-buffer",form='unformatted',access='stream',status='old')
+	do i=1,natom
+	  do j=1,3
+	    read(52) r(i,j)
+	  enddo
+	enddo
+	close(52)
+
+
+
+	Emin=E
 
 	if ( lineal_search ) allocate(Energy(n_points))
 
@@ -139,20 +170,48 @@
 	  call save_traj()
 
 	  if ( require_forces) then
-!	    call dft_get_qm_forces(gradient) !get gradient
+	    CALL system(do_forces_1)
+	    CALL system(do_forces_2)
+	    CALL system(do_forces_3)
+
+	    open(unit=51,file="force-buffer",form='unformatted',access='stream',status='old')
+            do i=1,natom
+              do j=1,3
+                read(51) gradient(j,i)
+              enddo
+            enddo
+            close(51)
 	    call max_force(gradient, Fmax) !find max force
 	  end if
 
+	  gradient=-gradient
+
 	  if ( lineal_search ) then
-	    call make_E_array(gradient, n_points,Energy, step_size, E,  Fmax) !obtain E(i) with r(i) = r_old - gradient/|gradient| * step_size *i
-	    call line_search(n_points,Energy, step_size, lambda ) !predict best lambda that minimice E moving r(lambda) = r_old - gradient/|gradient| * lambda
+!	    call make_E_array(gradient, n_points,Energy, step_size, E,  Fmax) !obtain E(i) with r(i) = r_old - gradient/|gradient| * step_size *i
+!	    call line_search(n_points,Energy, step_size, lambda ) !predict best lambda that minimice E moving r(lambda) = r_old - gradient/|gradient| * lambda
 	  else
 	    r_scrach=r
 	    lambda=step_size
 	  end if
 
 	  call move(lambda, Fmax,gradient)
-!	  call SCF(E)   calculo de E
+
+	 open(unit=53,file="position-buffer2")
+	 DO i=1,NATOM
+	    write(53,*) r(i,1), r(i,2), r(i,3)
+	 END DO
+	 close(53)
+	call system(make_coords)
+
+
+! energy calculation
+	CALL system(do_energy_1)
+	CALL system(do_energy_2)
+	CALL system(do_energy_3)
+	open(unit=50,file="energy-buffer",form='unformatted',access='stream',status='old')
+	read(50) E
+	close(50)
+
 
 
 	  d_E=abs(E-Emin)
@@ -202,6 +261,7 @@
 	if ( lineal_search ) deallocate(Energy)
  4800   FORMAT(6x, "steep", 7x, "energy", 14x, "Fmax ", 9x, "steep size", 10x, "lambda")
  4801   FORMAT(2x,"!",2x, i4, 2x, 4(f16.10,2x))
+ 4802   FORMAT(2x,3(f16.10,2x))
 	END subroutine
 
 
@@ -224,7 +284,7 @@
 
 	subroutine make_E_array(gradient, n_points,Energy, step_size, E, Fmax)
 !generate E(i) moving system r_new=r_old - i*step_size*gradient
-	use scarlett_mod, only : r, natom, verbose
+	use scarlett_mod, only : r, natom, verbose, do_energy_1, do_energy_2, do_energy_3
 	implicit none
 	double precision, intent(in) :: gradient(3,natom), step_size, Fmax
         double precision, intent(inout) :: E
@@ -249,6 +309,13 @@
 	  end do
 	 
 !	  call SCF(E) calculo de E
+          CALL system(do_energy_1)
+          CALL system(do_energy_2)
+          CALL system(do_energy_3)
+  	open(unit=50,file="energy-buffer",form='unformatted',access='stream',status='old')
+          read(50) E
+          close(50)
+
 	  Energy(i)=E
 	end do
 
