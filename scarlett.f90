@@ -187,14 +187,23 @@
 	  gradient=-gradient
 
 	  if ( lineal_search ) then
-!	    call make_E_array(gradient, n_points,Energy, step_size, E,  Fmax) !obtain E(i) with r(i) = r_old - gradient/|gradient| * step_size *i
-!	    call line_search(n_points,Energy, step_size, lambda ) !predict best lambda that minimice E moving r(lambda) = r_old - gradient/|gradient| * lambda
+	    call make_E_array(gradient, n_points,Energy, step_size, E,  Fmax) !obtain E(i) with r(i) = r_old - gradient/|gradient| * step_size *i
+	    call line_search(n_points,Energy, step_size, lambda ) !predict best lambda that minimice E moving r(lambda) = r_old - gradient/|gradient| * lambda
 	  else
 	    r_scrach=r
 	    lambda=step_size
 	  end if
 
+
+!	  write(*,*) "r"
+!	  write(*,*) r
+!	  write(*,*) "f"
+!	  write(*,*) gradient
+
 	  call move(lambda, Fmax,gradient)
+
+!	  write(*,*)  "rnew"
+!	  write(*,*) r
 
 	 open(unit=53,file="position-buffer2")
 	 DO i=1,NATOM
@@ -219,7 +228,7 @@
 	    Emin=E
 	    if (lambda .lt. 0.1d0 * step_size) step_size=step_size*0.1d0
 	    if (lambda .gt. (dble(n_points)-0.1d0) * step_size) then
-	      step_size=step_size*1.5
+	      step_size=step_size*1.5d0
 	      require_forces=.false.
 	    else 
 	      require_forces=.true.
@@ -274,7 +283,7 @@
 	integer :: i
 	Fmax=0.d0
         do i=1, natom
-          F_i=gradient(1,i)**2 + gradient(2,i)**2 + gradient(3,i)**2
+          F_i=gradient(1,i)**2d0 + gradient(2,i)**2d0 + gradient(3,i)**2d0
           F_i=sqrt(F_i)
           if (F_i .gt. Fmax) Fmax=F_i
         end do
@@ -284,7 +293,7 @@
 
 	subroutine make_E_array(gradient, n_points,Energy, step_size, E, Fmax)
 !generate E(i) moving system r_new=r_old - i*step_size*gradient
-	use scarlett_mod, only : r, natom, verbose, do_energy_1, do_energy_2, do_energy_3
+	use scarlett_mod, only : r, natom, verbose, do_energy_1, do_energy_2, do_energy_3, make_coords
 	implicit none
 	double precision, intent(in) :: gradient(3,natom), step_size, Fmax
         double precision, intent(inout) :: E
@@ -293,7 +302,7 @@
 	double precision, dimension(natom, 3) :: r_ini 
 	double precision :: a
 	double precision :: max_move
-	integer :: i,j,k
+	integer :: i,j,k,l
 
 !define step that normalice max force
 	max_move=step_size/Fmax
@@ -308,14 +317,19 @@
 	    end do
 	  end do
 	 
-!	  call SCF(E) calculo de E
+	  open(unit=53,file="position-buffer2")
+	  DO l=1,NATOM
+	    write(53,*) r(l,1), r(l,2), r(l,3)
+	  END DO
+	  close(53)
+	  call system(make_coords)
+! energy calculation
           CALL system(do_energy_1)
           CALL system(do_energy_2)
           CALL system(do_energy_3)
-  	open(unit=50,file="energy-buffer",form='unformatted',access='stream',status='old')
+	  open(unit=50,file="energy-buffer",form='unformatted',access='stream',status='old')
           read(50) E
           close(50)
-
 	  Energy(i)=E
 	end do
 
@@ -397,6 +411,7 @@
         write(12,*)
         DO i=1,NATOM
           write(12,5000) IZ(i), r(i,1)*b_2_ang, r(i,2)*b_2_ang, r(i,3)*b_2_ang
+	  write(*,5000) IZ(i), r(i,1)*b_2_ang, r(i,2)*b_2_ang, r(i,3)*b_2_ang
         END DO
  5000 FORMAT(2x,i2,2x,3(f16.10,2x))
 	END SUBROUTINE save_traj
