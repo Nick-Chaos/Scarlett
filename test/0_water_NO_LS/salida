@@ -1,0 +1,278 @@
+<====== Initializing G2G ======>
+GPU Device used: GeForce GTX 580
+Kernels: gpu
+Kernels: cpu
+Using 3 CPU Threads and 1 GPU Threads
+ JOB STARTED NOW
+mar may  9 19:17:15 ART 2017
+ en drive          19          42           5
+<======= GPU Code Initialization ========>
+atoms: 3
+max atoms: 3
+number of gaussians: 19
+do_forces: false
+s: 7 p: 2 d: 1
+m: 19 nco: 5
+ nco: 5
+density basis: s: 15 p: 3 d: 3
+density basis: m: 42
+Using device 0 for analytic integral calculations
+Weights: 5914us.
+Particion 0: 2327630
+Particion 1: 2271190
+Particion 2: 2501700
+Relacion max / min = 1.101493
+--> Thread OMP: 4
+--> Thread CPU: 3
+--> Thread GPU: 1
+--> Correccion de cubos chicos: 250000
+--> Puntos de separacion: 200
+Timer functions: 291us.
+MM point charges: 0
+TIMER [aint_qmmm_fock]: 875us.
+TIMER [cholesky]: 95us.
+TIMER [initial guess]: 156us.
+               ╔════════════╦═════════════╗
+               ║    Value   ║ Conv. Crit. ║
+    ╔══════════╬════════════╬═════════════╣
+    ║ Good     ║  0.100E+01 ║  0.100E-05  ║
+    ║ En. Good ║  0.100E+01 ║  0.100E+01  ║
+    ╚══════════╩════════════╩═════════════╝
+iteracion total: 23248us.
+XC energy: 0
+TIMER [commutators + basechange]: 20us.
+TIMER [Fock damping]: 24us.
+TIMER [actualiza rmm]: 70us.
+TIMER [scf - fock diagonalization]: 122us.
+TIMER [dspev]: 131us.
+TIMER [coeff]: 8us.
+TIMER [dens_GPU]: 9us.
+TIMER [otras cosas]: 15us.
+    ╔════════╦═════════════╦═══════════╦══════════════════════╗
+    ║ iter # ║           1 ║ QM Energy ║       -58.5829878    ║
+    ╚════════╩═════════════╩═══════════╩══════════════════════╝
+TIMER [Total iter]: 28350us.
+               ╔════════════╦═════════════╗
+               ║    Value   ║ Conv. Crit. ║
+    ╔══════════╬════════════╬═════════════╣
+    ║ Good     ║  0.199E+01 ║  0.100E-05  ║
+    ║ En. Good ║  0.586E+02 ║  0.100E+01  ║
+    ╚══════════╩════════════╩═════════════╝
+iteracion total: 23182us.
+XC energy: 0
+TIMER [commutators + basechange]: 15us.
+TIMER [Fock damping]: 15us.
+TIMER [actualiza rmm]: 47us.
+TIMER [scf - fock diagonalization]: 89us.
+TIMER [dspev]: 96us.
+TIMER [coeff]: 5us.
+TIMER [dens_GPU]: 5us.
+TIMER [otras cosas]: 10us.
+    ╔════════╦═════════════╦═══════════╦══════════════════════╗
+    ║ iter # ║           2 ║ QM Energy ║       -61.8903052    ║
+    ╚════════╩═════════════╩═══════════╩══════════════════════╝
+TIMER [Total iter]: 27498us.
+               ╔════════════╦═════════════╗
+               ║    Value   ║ Conv. Crit. ║
+    ╔══════════╬════════════╬═════════════╣
+    ║ Good     ║  0.133E+01 ║  0.100E-05  ║
+    ║ En. Good ║  0.331E+01 ║  0.100E+01  ║
+    ╚══════════╩════════════╩═════════════╝
+iteracion total: 23197us.
+XC energy: 0
+TIMER [commutators + basechange]: 15us.
+TIMER [actualiza rmm]: 27us.
+TIMER [diis]: 43us.
+TIMER [scf - fock diagonalization]: 85us.
+TIMER [dspev]: 92us.
+TIMER [coeff]: 5us.
+TIMER [dens_GPU]: 5us.
+TIMER [otras cosas]: 10us.
+    ╔════════╦═════════════╦═══════════╦══════════════════════╗
+    ║ iter # ║           3 ║ QM Energy ║       -64.0680705    ║
+    ╚════════╩═════════════╩═══════════╩══════════════════════╝
+TIMER [Total iter]: 27529us.
+               ╔════════════╦═════════════╗
+               ║    Value   ║ Conv. Crit. ║
+    ╔══════════╬════════════╬═════════════╣
+    ║ Good     ║  0.742E+00 ║  0.100E-05  ║
+    ║ En. Good ║  0.218E+01 ║  0.100E+01  ║
+    ╚══════════╩════════════╩═════════════╝
+iteracion total: 23178us.
+XC energy: 0
+TIMER [commutators + basechange]: 15us.
+TIMER [actualiza rmm]: 27us.
+TIMER [diis]: 16us.
+TIMER [scf - fock diagonalization]: 86us.
+TIMER [dspev]: 93us.
+TIMER [coeff]: 5us.
+TIMER [dens_GPU]: 5us.
+TIMER [otras cosas]: 10us.
+    ╔════════╦═════════════╦═══════════╦══════════════════════╗
+    ║ iter # ║           4 ║ QM Energy ║       -66.2657654    ║
+    ╚════════╩═════════════╩═══════════╩══════════════════════╝
+TIMER [Total iter]: 27469us.
+               ╔════════════╦═════════════╗
+               ║    Value   ║ Conv. Crit. ║
+    ╔══════════╬════════════╬═════════════╣
+    ║ Good     ║  0.704E-01 ║  0.100E-05  ║
+    ║ En. Good ║  0.220E+01 ║  0.100E+01  ║
+    ╚══════════╩════════════╩═════════════╝
+iteracion total: 23138us.
+XC energy: 0
+TIMER [commutators + basechange]: 15us.
+TIMER [actualiza rmm]: 27us.
+TIMER [diis]: 17us.
+TIMER [scf - fock diagonalization]: 84us.
+TIMER [dspev]: 91us.
+TIMER [coeff]: 5us.
+TIMER [dens_GPU]: 5us.
+TIMER [otras cosas]: 10us.
+    ╔════════╦═════════════╦═══════════╦══════════════════════╗
+    ║ iter # ║           5 ║ QM Energy ║       -66.8652994    ║
+    ╚════════╩═════════════╩═══════════╩══════════════════════╝
+TIMER [Total iter]: 27434us.
+               ╔════════════╦═════════════╗
+               ║    Value   ║ Conv. Crit. ║
+    ╔══════════╬════════════╬═════════════╣
+    ║ Good     ║  0.351E-01 ║  0.100E-05  ║
+    ║ En. Good ║  0.600E+00 ║  0.100E+01  ║
+    ╚══════════╩════════════╩═════════════╝
+iteracion total: 23142us.
+XC energy: 0
+TIMER [commutators + basechange]: 15us.
+TIMER [actualiza rmm]: 30us.
+TIMER [diis]: 23us.
+TIMER [scf - fock diagonalization]: 91us.
+TIMER [dspev]: 98us.
+TIMER [coeff]: 5us.
+TIMER [dens_GPU]: 6us.
+TIMER [otras cosas]: 10us.
+    ╔════════╦═════════════╦═══════════╦══════════════════════╗
+    ║ iter # ║           6 ║ QM Energy ║       -67.0862989    ║
+    ╚════════╩═════════════╩═══════════╩══════════════════════╝
+TIMER [Total iter]: 27466us.
+               ╔════════════╦═════════════╗
+               ║    Value   ║ Conv. Crit. ║
+    ╔══════════╬════════════╬═════════════╣
+    ║ Good     ║  0.877E-02 ║  0.100E-05  ║
+    ║ En. Good ║  0.221E+00 ║  0.100E+01  ║
+    ╚══════════╩════════════╩═════════════╝
+iteracion total: 23226us.
+XC energy: 0
+TIMER [commutators + basechange]: 15us.
+TIMER [actualiza rmm]: 28us.
+TIMER [diis]: 21us.
+TIMER [scf - fock diagonalization]: 88us.
+TIMER [dspev]: 95us.
+TIMER [coeff]: 5us.
+TIMER [dens_GPU]: 5us.
+TIMER [otras cosas]: 10us.
+    ╔════════╦═════════════╦═══════════╦══════════════════════╗
+    ║ iter # ║           7 ║ QM Energy ║       -67.1303730    ║
+    ╚════════╩═════════════╩═══════════╩══════════════════════╝
+TIMER [Total iter]: 27539us.
+               ╔════════════╦═════════════╗
+               ║    Value   ║ Conv. Crit. ║
+    ╔══════════╬════════════╬═════════════╣
+    ║ Good     ║  0.179E-02 ║  0.100E-05  ║
+    ║ En. Good ║  0.441E-01 ║  0.100E+01  ║
+    ╚══════════╩════════════╩═════════════╝
+iteracion total: 23631us.
+XC energy: 0
+TIMER [commutators + basechange]: 16us.
+TIMER [actualiza rmm]: 35us.
+TIMER [diis]: 31us.
+TIMER [scf - fock diagonalization]: 90us.
+TIMER [dspev]: 98us.
+TIMER [coeff]: 6us.
+TIMER [dens_GPU]: 6us.
+TIMER [otras cosas]: 11us.
+    ╔════════╦═════════════╦═══════════╦══════════════════════╗
+    ║ iter # ║           8 ║ QM Energy ║       -67.1407075    ║
+    ╚════════╩═════════════╩═══════════╩══════════════════════╝
+TIMER [Total iter]: 27972us.
+               ╔════════════╦═════════════╗
+               ║    Value   ║ Conv. Crit. ║
+    ╔══════════╬════════════╬═════════════╣
+    ║ Good     ║  0.275E-03 ║  0.100E-05  ║
+    ║ En. Good ║  0.103E-01 ║  0.100E+01  ║
+    ╚══════════╩════════════╩═════════════╝
+iteracion total: 23081us.
+XC energy: 0
+TIMER [commutators + basechange]: 15us.
+TIMER [actualiza rmm]: 28us.
+TIMER [diis]: 24us.
+TIMER [scf - fock diagonalization]: 87us.
+TIMER [dspev]: 94us.
+TIMER [coeff]: 5us.
+TIMER [dens_GPU]: 6us.
+TIMER [otras cosas]: 10us.
+    ╔════════╦═════════════╦═══════════╦══════════════════════╗
+    ║ iter # ║           9 ║ QM Energy ║       -67.1422716    ║
+    ╚════════╩═════════════╩═══════════╩══════════════════════╝
+TIMER [Total iter]: 27396us.
+               ╔════════════╦═════════════╗
+               ║    Value   ║ Conv. Crit. ║
+    ╔══════════╬════════════╬═════════════╣
+    ║ Good     ║  0.156E-04 ║  0.100E-05  ║
+    ║ En. Good ║  0.156E-02 ║  0.100E+01  ║
+    ╚══════════╩════════════╩═════════════╝
+iteracion total: 23083us.
+XC energy: 0
+TIMER [commutators + basechange]: 15us.
+TIMER [actualiza rmm]: 28us.
+TIMER [diis]: 26us.
+TIMER [scf - fock diagonalization]: 87us.
+TIMER [dspev]: 94us.
+TIMER [coeff]: 5us.
+TIMER [dens_GPU]: 5us.
+TIMER [otras cosas]: 10us.
+    ╔════════╦═════════════╦═══════════╦══════════════════════╗
+    ║ iter # ║          10 ║ QM Energy ║       -67.1423253    ║
+    ╚════════╩═════════════╩═══════════╩══════════════════════╝
+TIMER [Total iter]: 27401us.
+               ╔════════════╦═════════════╗
+               ║    Value   ║ Conv. Crit. ║
+    ╔══════════╬════════════╬═════════════╣
+    ║ Good     ║  0.295E-05 ║  0.100E-05  ║
+    ║ En. Good ║  0.538E-04 ║  0.100E+01  ║
+    ╚══════════╩════════════╩═════════════╝
+iteracion total: 23143us.
+XC energy: 0
+TIMER [commutators + basechange]: 15us.
+TIMER [actualiza rmm]: 31us.
+TIMER [diis]: 30us.
+TIMER [scf - fock diagonalization]: 88us.
+TIMER [dspev]: 95us.
+TIMER [coeff]: 5us.
+TIMER [dens_GPU]: 5us.
+TIMER [otras cosas]: 10us.
+    ╔════════╦═════════════╦═══════════╦══════════════════════╗
+    ║ iter # ║          11 ║ QM Energy ║       -67.1423293    ║
+    ╚════════╩═════════════╩═══════════╩══════════════════════╝
+TIMER [Total iter]: 27464us.
+ CONVERGED AT          11 ITERATIONS
+iteracion total: 21304us.
+XC energy: -9.21046
+ 
+    ╔════════════════════════════════════════════╗
+    ║        ENERGY CONTRIBUTIONS IN A.U.        ║
+    ╠══════════════════╦═════════════════════════╣
+    ║   ONE ELECTRON   ║      -122.6375107       ║
+    ╠══════════════════╬═════════════════════════╣
+    ║   COULOMB        ║        46.5225405       ║
+    ╠══════════════════╬═════════════════════════╣
+    ║   NUCLEAR        ║         8.9726409       ║
+    ╠══════════════════╬═════════════════════════╣
+    ║   EXC. - CORR.   ║        -9.2104627       ║
+    ╠══════════════════╬═════════════════════════╣
+    ║   TOTAL          ║       -76.3527919       ║
+    ╚══════════════════╩═════════════════════════╝
+ 
+ 
+  Timer:   0.000000000000000E+000
+ 
+TIMER [SCF]: 335704us.
+TIMER [SCF_full]: 335711us.
+<====== Deinitializing G2G ======>

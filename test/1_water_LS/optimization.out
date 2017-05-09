@@ -1,0 +1,22 @@
+      steep       energy              Fmax          steep size          lambda
+  !     0    -76.0668533064      0.0000000000      0.5000000000      0.0000000000
+  Lineal search Energy     -76.0668533064
+  Lineal search Energy     -76.2882505656
+  Lineal search Energy     -76.2891546216
+  Lineal search Energy     -76.2913342013
+  !     1    -76.2913342013      0.0838673003      0.7500000000      2.0000000000
+  Lineal search Energy     -76.2913342013
+  Lineal search Energy     -76.1862348799
+  Lineal search Energy     -76.0167306350
+  Lineal search Energy     -75.8947797299
+  !     2    -76.2913342013      0.0838673003      0.0750000000      0.0000000000
+  Lineal search Energy     -76.2913342013
+  Lineal search Energy     -76.3501973511
+  Lineal search Energy     -76.3521822142
+  Lineal search Energy     -76.3432375353
+  !     3    -76.3529514891      0.2880273611      0.0750000000      0.2011203998
+  Lineal search Energy     -76.3529514891
+  Lineal search Energy     -76.3474650274
+  Lineal search Energy     -76.3399527344
+  Lineal search Energy     -76.3304364712
+  !     4    -76.3529514891      0.0076029961      0.0075000000      0.0000000000

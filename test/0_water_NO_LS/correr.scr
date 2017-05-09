@@ -1,0 +1,15 @@
+#!/bin/bash
+
+ifort -check all -traceback armar-coord-lio.f90 -o new_coord_lio
+
+cp agua0.xyz agua.xyz
+
+ifort -check all -traceback scarlett.f90 -o scarlett
+
+./scarlett -i input
+
+
+
+
+
+

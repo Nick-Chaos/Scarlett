@@ -1,0 +1,14 @@
+&jolie
+verbose = 5
+Force_cut = 3D-2
+Energy_cut = 1D-3
+minimzation_steep=5D-1
+n_min_steeps = 50
+lineal_search =.false.
+n_points = 4
+natom = 3
+do_energy_1 = "/home/nick/programas/optimizador_externo/lio/liosolo/liosolo -i agua.in -b basis -c agua.xyz -v > salida"
+do_forces_1 = "/home/nick/programas/optimizador_externo/lio/liosolo/liosolo -i agua-forces.in -b basis -c agua.xyz -v > salida"
+make_coords = "./new_coord_lio"
+&end
+~    
