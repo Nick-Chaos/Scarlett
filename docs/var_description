@@ -1,0 +1,44 @@
+Force_cut  real*8 convergence criteria in forces
+Energy_cut  real*8 convergence criteria in energy
+minimzation_steep  real*8 max distance displacement for 1st steep
+n_points
+n_min_steeps  integer max number of minimization steeps
+lineal_search logical enable lineal search
+natom  integer number of atoms in systems
+verbose  integer verbose level
+
+
+!comands for energy calculation
+!all are character(len=500), scarlett will run ./do_energy_1 , ./do_energy_2 ./do_energy_3
+!you must complte with bash line usign " at start and end
+!result of 3 calls may generate a file called energy-buffer that only contain a value
+!of energy in binary
+do_energy_1
+do_energy_2
+do_energy_3
+
+!same as do_energy_? but for force calculation
+!result may generete a binary file calle force-buffer
+!that contain gradien of all atoms
+!format must be:
+!gradient(x, atom1)
+!gradient(y,atom1)
+!gradient(z, atom1)
+!gradient(x, atom2)
+!...
+!...
+
+do_forces_1
+do_forces_2
+do_forces_3
+
+!create a new coordinates
+make_coords character(len=500)
+!this comand may read a file position-buffer2
+!writed in the form
+!x(atom1) y(atom1) z(atom1)
+!x(atom2) y(atom2) z(atom2)
+!...
+!...
+!
+!and generet a new restart file for your code 
