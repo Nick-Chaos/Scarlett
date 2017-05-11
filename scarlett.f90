@@ -45,10 +45,12 @@
 	subroutine init_scarlet()
 	USE scarlett_mod, only : r, Iz, natom
 	implicit none
+	integer :: i
 	allocate (r(natom,3), Iz(natom))
 !para prueba
-	Iz=1
-	IZ(1)=8
+        open(unit=32,file="IZ.dat")
+        read(32,*) (IZ(i),i=1,natom)
+        close(32)
 	end subroutine init_scarlet
 
 	subroutine finalize_scarlet()
